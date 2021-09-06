@@ -79,14 +79,7 @@ class App:
         for idx, pos in enumerate(self.e_pos):
             self.enemies.append(Enemy(self, vec(pos), idx)) 
 
-    def draw_grid(self):
-        for x in range(WIDTH//32):
-            pygame.draw.line(self.screen, RED, (x*WIDTH//32,0),(x*WIDTH//32,HEIGHT))
-        for x in range(HEIGHT//25):
-            pygame.draw.line(self.screen, RED, (0,x*HEIGHT//25),(WIDTH, x*HEIGHT//25))
-
-
-    
+ 
     def start_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -147,7 +140,7 @@ class App:
         pygame.display.update()
         
     def draw_coins(self):
-        for coin in self.coins:
+        for coin in self.coins: 
             pygame.draw.circle(self.screen, RED,
                                (int(coin.x*self.cell_width)+self.cell_width//2+TOP_BOTTOM_BUFFER//2,
                                 int(coin.y*self.cell_height)+self.cell_height//2+TOP_BOTTOM_BUFFER//2), 5)
@@ -213,18 +206,3 @@ class App:
         self.draw_text(quit_text, self.screen, [
                        WIDTH//2, HEIGHT//1.5],  30, WHITE, START_FONT, centered=True)
         pygame.display.update()    
-
-    def reset(self):
-        self.player.lives = 3
-        self.player.current_score = 0
-        self.player.grid_pos = vec(self.player.starting_pos)
-        self.player.pix_pos = self.player.get_pix_pos()
-        self.player.direction *= 0
-
-        self.coins = []
-        with open("map.txt", 'r') as file:
-            for yidx, line in enumerate(file):
-                for xidx, char in enumerate(line):
-                    if char == 'C':
-                        self.coins.append(vec(xidx, yidx))
-        self.state = "playing"
