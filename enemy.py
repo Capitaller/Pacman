@@ -1,6 +1,4 @@
 import pygame
-import random
-import sys
 from game_settings import *
 
 vec = pygame.math.Vector2
@@ -21,8 +19,6 @@ class Enemy:
    
     def update(self):
         pass
-
-      
 
     def draw(self):
         pygame.draw.circle(self.app.screen, self.colour,

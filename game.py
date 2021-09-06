@@ -31,7 +31,6 @@ class App:
         while self.running:
             if self.state == 'start':
                 self.start_events()
-                self.start_update()
                 self.start_draw()
             elif self.state == 'playing':
                 self.playing_events()
@@ -39,11 +38,9 @@ class App:
                 self.playing_draw()
             elif self.state == 'game win':
                 self.game_win_events()
-                self.game_win_update()
                 self.game_win_draw()
             elif self.state == 'game over':
                 self.game_lost_events()
-                self.game_lost_update()
                 self.game_lost_draw()
             else:
                 self.running = False
@@ -98,9 +95,6 @@ class App:
                 self.state = 'playing'
 
 
-    def start_update(self):
-        pass
-
     def start_draw(self):
         self.screen.fill(BLACK)
         self.draw_text('GET {} COINS TO WIN'.format(COINS_TO_WIN), self.screen, [
@@ -109,7 +103,7 @@ class App:
                        WIDTH//2, HEIGHT//2+100], START_TEXT_SIZE, YELLOW, START_FONT, centered=True)
         
         pygame.display.update()
-
+########################### GAME PLAYING FUNCTIONS ################################
     def playing_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -170,8 +164,6 @@ class App:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.running = False
 
-    def game_win_update(self):
-        pass
 
     def game_win_draw(self):
         self.screen.fill(BLACK)
@@ -210,8 +202,6 @@ class App:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.running = False
 
-    def game_lost_update(self):
-        pass
 
     def game_lost_draw(self):
         self.screen.fill(BLACK)
